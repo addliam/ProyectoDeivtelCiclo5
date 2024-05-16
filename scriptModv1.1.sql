@@ -140,6 +140,21 @@ CREATE TABLE [Factura] (
       REFERENCES [Suscripcion]([SuscripcionID])
 );
 
+CREATE TABLE [DetalleFactura] (
+  [DetalleFacturaID] int PRIMARY KEY IDENTITY(1,1),
+  [FacturaID] int,
+  [ProductoID] int,
+  [Precio] decimal(6,2) NOT NULL,
+  [DiaInicio] date NOT NULL,
+  [DiaFin] date NOT NULL,
+  CONSTRAINT [FK_DetalleFactura.FacturaID]
+    FOREIGN KEY ([FacturaID])
+      REFERENCES [Factura]([FacturaID]),
+  CONSTRAINT [FK_DetalleFactura.ProductoID]
+    FOREIGN KEY ([ProductoID])
+      REFERENCES [Producto]([ProductoID])
+);
+
 -- RELACION 1:N Factura-Pago porque pueden haber caso extremo de pagos parciales
 CREATE TABLE [Pago] (
   [PagoID] int PRIMARY KEY IDENTITY(1,1),
@@ -313,4 +328,5 @@ CREATE TABLE [BitacoraAtencion] (
     FOREIGN KEY ([EmpleadoID])
       REFERENCES [Empleado]([EmpleadoID])
 );
--- ok 15/05
+-- ok 16/05
+-- TODO: Relaciones 1 a 1 y claves compuesta para evitar duplicados.
