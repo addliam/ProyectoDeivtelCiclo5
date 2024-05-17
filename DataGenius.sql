@@ -739,7 +739,7 @@ JOIN TipoDocumentoIdentidad TDOC ON TDOC.TipoDocumentoIdentidadID=DI.TipoDocumen
 JOIN PlanSuscripcion PL ON PL.PlanSuscripcionID = SU.PlanSuscripcionID
 JOIN Direccion DIR ON DIR.DireccionID = SU.DireccionID
 JOIN CicloFacturacion CF ON CF.CicloFacturacionID = SU.CicloFacturacionID
-
+GO
 CREATE VIEW v_AuditoriaDetalle
 AS
 SELECT AU.AuditoriaID, 
@@ -752,3 +752,4 @@ AU.Descripcion
 FROM Auditoria AU
 JOIN Operacion OP ON OP.OperacionID = AU.OperacionID
 JOIN Usuario US ON US.UsuarioID = AU.UsuarioID
+GO
