@@ -337,6 +337,7 @@ CREATE TABLE [Auditoria] (
       REFERENCES [Operacion]([OperacionID])
 );
 
+-- 2. Inserts
 USE DataGenius
 GO
 -- SET IDENTITY_INSERT.+ON 
@@ -696,6 +697,26 @@ INSERT [dbo].[Auditoria] ([AuditoriaID], [FechaHora], [OperacionID], [UsuarioID]
 SET IDENTITY_INSERT [dbo].[Auditoria] OFF
 GO
 
+-- 3. Indices
+-- Nomenclatura: IX_MyTable_MyColumn_AnotherColumn 
+USE DataGenius
+GO
+CREATE NONCLUSTERED INDEX IX_DocumentoIdentidad_Numero ON
+[dbo].[DocumentoIdentidad](Numero);
+GO
+CREATE NONCLUSTERED INDEX IX_Usuario_Correo ON
+[dbo].[Usuario](Correo);
+GO
+CREATE NONCLUSTERED INDEX IX_Usuario_Nombre ON
+[dbo].[CicloFacturacion](Nombre);
+GO
+CREATE NONCLUSTERED INDEX IX_Celular_Numero ON
+[dbo].[Celular](Numero);
+GO
+
+-- 4. Vistas
+USE DataGenius
+GO
 CREATE VIEW v_PermisoDetalle
 AS
 SELECT P.[PermisoID]
