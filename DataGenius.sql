@@ -138,6 +138,17 @@ CREATE TABLE [Suscripcion] (
       REFERENCES [DocumentoIdentidad]([DocumentoIdentidadID])
 );
 
+-- estado suscrip
+CREATE TABLE [EstadoSuscripcion] (
+  [EstadoSuscripcionID] int PRIMARY KEY IDENTITY(1,1),
+  [SuscripcionID] int UNIQUE,
+  [Activo] bit DEFAULT 1,
+  [FechaHora] datetime2(0) NOT NULL,
+  CONSTRAINT [FK_EstadoSuscripcion.SuscripcionID]
+    FOREIGN KEY ([SuscripcionID])
+      REFERENCES [Suscripcion]([SuscripcionID])
+);
+
 CREATE TABLE [Factura] (
   [FacturaID] int PRIMARY KEY IDENTITY(1,1),
   [SuscripcionID] int NOT NULL,
@@ -650,8 +661,15 @@ GO
 SET IDENTITY_INSERT [dbo].[Suscripcion] ON 
 
 INSERT [dbo].[Suscripcion] ([SuscripcionID], [DocumentoIdentidadID], [PlanSuscripcionID], [DireccionID], [CicloFacturacionID], [FechaVenta], [FechaInstalacion]) VALUES (1, 1, 9, 1, 1, CAST(N'2024-01-01' AS Date), CAST(N'2024-01-05' AS Date))
-INSERT [dbo].[Suscripcion] ([SuscripcionID], [DocumentoIdentidadID], [PlanSuscripcionID], [DireccionID], [CicloFacturacionID], [FechaVenta], [FechaInstalacion]) VALUES (2, 1, 4, 2, 3, CAST(N'2023-10-15' AS Date), CAST(N'2023-10-24' AS Date))
+INSERT [dbo].[Suscripcion] ([SuscripcionID], [DocumentoIdentidadID], [PlanSuscripcionID], [DireccionID], [CicloFacturacionID], [FechaVenta], [FechaInstalacion]) VALUES (2, 1, 4, 2, 3, CAST(N'2024-04-15' AS Date), CAST(N'2023-10-24' AS Date))
 SET IDENTITY_INSERT [dbo].[Suscripcion] OFF
+GO
+-- estado suscrip
+SET IDENTITY_INSERT [dbo].[EstadoSuscripcion] ON 
+
+INSERT [dbo].[EstadoSuscripcion] ([EstadoSuscripcionID], [SuscripcionID], [Activo], [FechaHora]) VALUES (1, 1, 1, CAST(N'2024-01-01T00:00:00.0000000' AS DateTime2))
+INSERT [dbo].[EstadoSuscripcion] ([EstadoSuscripcionID], [SuscripcionID], [Activo], [FechaHora]) VALUES (2, 2, 1, CAST(N'2024-04-15T00:00:00.0000000' AS DateTime2))
+SET IDENTITY_INSERT [dbo].[EstadoSuscripcion] OFF
 GO
 -- detalle router
 SET IDENTITY_INSERT [dbo].[DetalleRouter] ON 
